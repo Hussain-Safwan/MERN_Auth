@@ -26,7 +26,7 @@ exports.postRegister = async (req, res) => {
       console.log('User saved', user)
       res.json({
         status: true,
-        msg: 'user saved'
+        msg: 'user saved',
       })
     }
   }

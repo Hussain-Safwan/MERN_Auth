@@ -65,8 +65,9 @@ const submit = (e) => {
       password: teamInfo.password,
       conPassword: teamInfo.conPassword,
       membersInfo
-    }
-    dispatch(register(team))
+  }
+  dispatch(register(team))
+  history.push('/login')
   }
 }
 const textStyles = {

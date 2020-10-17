@@ -7,14 +7,7 @@ export const register = data => (dispatch, getState) => {
     }
   }
   axios.post('http://localhost:4000/auth/register', data, config).then(res => {
-    const cred = {
-      email: data.email,
-      password: data.password
-    }
-    dispatch({
-      type: 'LOAD_USER',
-      payload: cred
-    })
+
   })
 }
 

@@ -28,13 +28,20 @@ const Login = () => {
     }
   }, [auth])
 
+  const valid = data => {
+    return data == null || data == '' || data == undefined
+  }
+
   const handleInput = e => {
     const cred = credentials
     cred[e.target.name] = e.target.value
     setCredentials(cred)
   }
   const submit = e => {
-    dispatch(login(credentials))
+    const { email, password } = credentials
+    if (!valid(email) && !valid(password)) {
+      dispatch(login(credentials))
+    }
   }
   const textStyles = {
     width: '100%',
@@ -61,7 +68,7 @@ const Login = () => {
         onChange={e => handleInput(e)}/>
         <p className='right'><Link style={linkStyles}>Forgot password?</Link></p>
         <Button style={{marginTop: '30px', width: '100%'}} variant='contained' onClick={submit} color='secondary'>LOGIN</Button>
-        <p>Don't have an account? <Link style={linkStyles} to='/'>Create one!</Link></p>
+        <p>Don't have an account? <Link style={linkStyles} to='/register'>Create one!</Link></p>
       </div>
     </div>
   )
