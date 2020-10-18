@@ -3,6 +3,7 @@ import EachMember from '../layouts/EachMember'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Select from '@material-ui/core/Select'
+import DeleteIcon from '@material-ui/icons/Delete'
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link, useHistory } from 'react-router-dom'
 
@@ -16,12 +17,6 @@ import { useDispatch, useSelector } from 'react-redux'
 const Register = () => {
 const auth = useSelector(state => state.auth)
 
-// useEffect(() => {
-//   if (auth.user) {
-//     history.push('/')
-//   }
-// }, [auth])
-
 const addMember = e => {
   if (membersInfo.length < 3) {
     setMembersInfo([...membersInfo,  {
@@ -31,6 +26,15 @@ const addMember = e => {
     }])
   }
 }
+const deleteMember = (e, i) => {
+if (membersInfo.length > 1) {
+  const mInfo = [...membersInfo]
+  mInfo.splice(i, 1)
+  setMembersInfo(mInfo)
+  console.log(membersInfo)
+}
+}
+
 const [teamInfo, setTeamInfo] = useState({
   teamName: '',
   coachName: '',
@@ -116,7 +120,10 @@ const handleTeamInfo = (e) => {
       {
         membersInfo.map((member, i) => (
         <div>
-          <h3>Participent {i+1}</h3> 
+          <div className='side'>
+              <h3>Participent {i+1}</h3> 
+              <DeleteIcon onClick={e => deleteMember(e, i)} style={{marginTop: '10px', cursor: 'pointer', color: 'red'}} />
+          </div>
           <TextField style={textStyles} name='memberName' onChange={e => handleInputs(e, i)} variant='outlined' label='Name of the participent'
           value={member.memberName} /> <br />
           <div className='side'>
